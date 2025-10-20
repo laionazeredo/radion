@@ -8,7 +8,9 @@ third-party plugins and libraries.
 
   /* Disable ligatures */
   font-variant-ligatures: none;
-  font-feature-settings: "liga" 0, "calt" 0;
+  font-feature-settings:
+    "liga" 0,
+    "calt" 0;
 }
 
 @keyframes intro {
@@ -107,7 +109,7 @@ blockquote cite::before {
 }
 
 .light a[itemprop="url"] {
-  color: #8D2220;
+  color: #8d2220;
   font-weight: bold;
 }
 
@@ -117,7 +119,8 @@ a[itemprop="url"]:hover {
 
 a[href*="://"]::after,
 a[rel*="external"] {
-  content: " " url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23ff9800'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E");
+  content: " "
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%23ff9800'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E");
 }
 
 /* Remove external link arrow */
@@ -159,19 +162,18 @@ html {
 
 .hack pre {
   font-size: 17px;
-
 }
 
 .light pre {
   color: #cccccc !important;
 }
 
-
 .icon {
   margin-bottom: -3px;
 }
 
-article[itemtype="http://schema.org/CreativeWork"] {
+article[itemtype="http://schema.org/CreativeWork"]
+{
   margin-bottom: 3rem;
 
   header {
@@ -197,7 +199,13 @@ article [itemprop="summary"] p {
 
 @media screen and (min-width: 768px) {
   html {
-    font-size: 1em;
+    font-size: 1.5em;
+  }
+
+  .subtitle {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #999;
   }
 
   .container {
@@ -227,7 +235,6 @@ article [itemprop="summary"] p {
 .footnote-reference {
   margin-left: 4px;
 }
-
 
 .footnote-definition {
   display: block;

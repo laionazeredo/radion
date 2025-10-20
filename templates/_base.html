@@ -1,5 +1,5 @@
-{% import "macros/post_macros.html" as post_macros %}
-{% import "macros/index_macros.html" as index_macros %}
+{% import "macros/post_macros.html" as post_macros %} {% import
+"macros/index_macros.html" as index_macros %}
 
 <!doctype html>
 <html lang="en">
@@ -10,29 +10,24 @@
     <!-- Enable responsiveness on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {% block meta_description %}
-      {% if page and page.description %}
-        <meta name="description" content="{{ page.description }}" />
-        <meta property="og:description" content="{{ page.description }}" />
-        <meta property="twitter:description" content="{{ page.description }}" />
-      {% elif page and page.summary %}
-        {% set content_desc = page.summary | striptags %}
-        <meta name="description" content="{{ content_desc }}" />
-        <meta property="og:description" content="{{ content_desc }}" />
-        <meta property="twitter:description" content="{{ content_desc }}" />
-      {% elif config.description %}
-        <meta name="description" content="{{ config.description }}" />
-        <meta property="og:description" content="{{ config.description }}" />
-        <meta property="twitter:description" content="{{ config.description }}" />
-      {% endif %}
-    {% endblock meta_description %}
+    {% block meta_description %} {% if page and page.description %}
+    <meta name="description" content="{{ page.description }}" />
+    <meta property="og:description" content="{{ page.description }}" />
+    <meta property="twitter:description" content="{{ page.description }}" />
+    {% elif page and page.summary %} {% set content_desc = page.summary |
+    striptags %}
+    <meta name="description" content="{{ content_desc }}" />
+    <meta property="og:description" content="{{ content_desc }}" />
+    <meta property="twitter:description" content="{{ content_desc }}" />
+    {% elif config.description %}
+    <meta name="description" content="{{ config.description }}" />
+    <meta property="og:description" content="{{ config.description }}" />
+    <meta property="twitter:description" content="{{ config.description }}" />
+    {% endif %} {% endblock meta_description %}
 
     <!-- Title -->
-    {% if page and page.title %}
-      {% set title = page.title %}
-    {% else %}
-      {% set title = config.title %}
-    {% endif %}
+    {% if page and page.title %} {% set title = page.title %} {% else %} {% set
+    title = config.title %} {% endif %}
     <title>{% block title %} {{ title }} {% endblock title %}</title>
 
     <!-- Additional Facebook Meta Tags -->
@@ -45,7 +40,10 @@
       property="og:type"
       content="{% if page %}article{% else %}website{% endif %}"
     />
-    <meta property="og:title" content="{% block og_title %}{{ title }}{% endblock og_title %}" />
+    <meta
+      property="og:title"
+      content="{% block og_title %}{{ title }}{% endblock og_title %}"
+    />
 
     <!-- Additional Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -53,30 +51,22 @@
       property="twitter:url"
       content="{% if page %}{{ page.permalink }}{% else %}{{ config.base_url }}{% endif %}"
     />
-    <meta name="twitter:title" content="{% block twitter_title %}{{ title }}{% endblock twitter_title %}" />
+    <meta
+      name="twitter:title"
+      content="{% block twitter_title %}{{ title }}{% endblock twitter_title %}"
+    />
 
     <!-- Cover images -->
-    {% set cover_image = config.base_url ~ "/icons/favicon/web-app-manifest-512x512.png" %}
-    {% if page and page.extra.cover_image and page.assets %}
-      {% for asset in page.assets %}
-        {% if asset is ending_with(page.extra.cover_image) %}
-          {% set_global cover_image = config.base_url ~ asset %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% set cover_image = config.base_url ~
+    "/icons/favicon/web-app-manifest-512x512.png" %} {% if page and
+    page.extra.cover_image and page.assets %} {% for asset in page.assets %} {%
+    if asset is ending_with(page.extra.cover_image) %} {% set_global
+    cover_image = config.base_url ~ asset %} {% break %} {% endif %} {% endfor
+    %} {% endif %}
 
-    <meta
-      property="og:image"
-      content="{{ cover_image }}"
-    />
+    <meta property="og:image" content="{{ cover_image }}" />
 
-    <meta
-      name="twitter:image"
-      content="{{ cover_image }}"
-    />
-
-
+    <meta name="twitter:image" content="{{ cover_image }}" />
 
     <!-- Favicons -->
     {% if config.extra.favicon | default (value="true") %}
@@ -119,10 +109,10 @@
 
     <!-- Load Styles -->
     {% block styles %}
-      <link
-        rel="stylesheet"
-        href="{{ get_url(path='site.css', trailing_slash=false) | safe }}"
-      />
+    <link
+      rel="stylesheet"
+      href="{{ get_url(path='site.css', trailing_slash=false) | safe }}"
+    />
     {% endblock styles %}
 
     <!-- Load Fonts -->
@@ -132,33 +122,33 @@
     <script src="{{ get_url(path='js/init-theme.js', trailing_slash=false) | safe }}"></script>
 
     <!-- Reference return to click position script -->
-    <script defer src="{{ get_url(path='js/reference-return.js', trailing_slash=false) | safe }}"></script>
+    <script
+      defer
+      src="{{ get_url(path='js/reference-return.js', trailing_slash=false) | safe }}"
+    ></script>
 
     <!-- Additional scripts -->
-    {% block scripts %}
-      {% if config.extra.codeblock %}
-        <script defer src="{{ get_url(path='js/codeblock.js', trailing_slash=false) | safe }}"></script>
-      {% endif %}
-      {% if config.extra.theme %}
-        <script src="{{ get_url(path='js/toggle-theme.js', trailing_slash=false) | safe }}"></script>
-      {% endif %}
-      {% include "partials/latex.html" %}
-      {% include "partials/search.html" %}
-    {% endblock scripts %}
+    {% block scripts %} {% if config.extra.codeblock %}
+    <script
+      defer
+      src="{{ get_url(path='js/codeblock.js', trailing_slash=false) | safe }}"
+    ></script>
+    {% endif %} {% if config.extra.theme %}
+    <script src="{{ get_url(path='js/toggle-theme.js', trailing_slash=false) | safe }}"></script>
+    {% endif %} {% include "partials/latex.html" %} {% include
+    "partials/search.html" %} {% endblock scripts %}
   </head>
 
   <!-- Body element (contents of the page) -->
   <body class="hack main container">
-    {% block content %}
-    {% block header %}
-      {{ index_macros::header(config=config) }}
-    {% endblock header %}
+    {% block content %} {% block header %} {{
+    index_macros::header(config=config) }} {% endblock header %}
 
     <main>
-      {% block main %}
-      {{ index_macros::page_lister(radion_title=config.extra.radion_title, paginator=paginator) }}
-      {{ index_macros::nav(paginator=paginator) }}
-      {% endblock main %}
+      {% block main %} {{
+      index_macros::page_lister(radion_title=config.extra.radion_title,
+      radion_subtitle=config.extra.radion_subtitle, paginator=paginator) }} {{
+      index_macros::nav(paginator=paginator) }} {% endblock main %}
     </main>
     {% endblock content %}
   </body>
